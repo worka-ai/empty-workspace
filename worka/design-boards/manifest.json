@@ -1,0 +1,10 @@
+{
+  "boards": [
+    {
+      "id": "overview",
+      "title": "Active operations overview",
+      "image": "docs/screenshots/overview.svg",
+      "purpose": "Show the workspace after work is already happening."
+    }
+  ]
+}

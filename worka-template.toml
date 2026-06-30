@@ -1,0 +1,41 @@
+schema_version = 1
+
+[template]
+id = "worka-ai/empty-workspace"
+name = "Empty Workspace"
+summary = "A blank Worka workspace template used for intent-driven workspace creation."
+version = "0.1.0"
+license = "Apache-2.0"
+min_worka_version = "0.1.0"
+kind = "workspace_app"
+
+[publisher]
+source = "github"
+owner_kind = "org"
+owner = "worka-ai"
+repo = "empty-workspace"
+
+[classification]
+categories = ["operations"]
+tags = ["onboarding", "empty"]
+
+[marketplace]
+short_description = "A blank Worka workspace template used for intent-driven workspace creation."
+screenshots = ["docs/screenshots/overview.svg"]
+
+[fst]
+blueprint = "worka/blueprint.json"
+requirements_md = "worka/requirements.md"
+requirements_json = "worka/requirements.json"
+design_boards = "worka/design-boards/manifest.json"
+specification_md = "worka/specification.md"
+specification_json = "worka/specification.json"
+
+[app]
+crate = "app"
+native_binary = true
+plugin = true
+
+[personaldb]
+schema = "worka/personaldb/schema.toml"
+migrations = "worka/personaldb/migrations"

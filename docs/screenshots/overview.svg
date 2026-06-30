@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="960" viewBox="0 0 1440 960">
+  <rect width="1440" height="960" fill="#f7f2e8"/>
+  <rect x="96" y="80" width="1248" height="800" rx="34" fill="#fffaf0" stroke="#ded2bc"/>
+  <text x="144" y="152" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#1f2a24">Empty Workspace</text>
+  <text x="144" y="198" font-family="Arial, sans-serif" font-size="20" fill="#667065">Live workspace operations</text>
+  <rect x="144" y="248" width="520" height="260" rx="24" fill="#eef4ea" stroke="#cdddc6"/>
+  <text x="184" y="310" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#233327">Agent activity</text>
+  <text x="184" y="360" font-family="Arial, sans-serif" font-size="18" fill="#475247">New integration event received</text>
+  <text x="184" y="402" font-family="Arial, sans-serif" font-size="18" fill="#475247">Policy checked before action</text>
+  <text x="184" y="444" font-family="Arial, sans-serif" font-size="18" fill="#475247">Human approval requested when needed</text>
+  <rect x="720" y="248" width="528" height="260" rx="24" fill="#f3ead8" stroke="#dfcfaf"/>
+  <text x="760" y="310" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#3a2d20">Workspace state</text>
+  <text x="760" y="360" font-family="Arial, sans-serif" font-size="18" fill="#5c5246">Open tasks, decisions, and audit trail</text>
+  <text x="760" y="402" font-family="Arial, sans-serif" font-size="18" fill="#5c5246">Backed by brokered PersonalDB access</text>
+  <rect x="144" y="560" width="1104" height="220" rx="24" fill="#ffffff" stroke="#ded2bc"/>
+  <text x="184" y="626" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#1f2a24">Human in the loop</text>
+  <text x="184" y="676" font-family="Arial, sans-serif" font-size="18" fill="#475247">The app shows exactly where an agent stopped and what it needs from the user.</text>
+</svg>

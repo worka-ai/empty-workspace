@@ -1,0 +1,19 @@
+[database]
+name = "workspace"
+version = 1
+
+[[entity]]
+name = "event"
+primary_key = "event_id"
+
+[[entity]]
+name = "task"
+primary_key = "task_id"
+
+[[entity]]
+name = "audit_entry"
+primary_key = "audit_id"
+
+[[entity]]
+name = "attention_request"
+primary_key = "attention_id"

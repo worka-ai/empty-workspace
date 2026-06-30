@@ -1,0 +1,11 @@
+{
+  "workspace_name": "Empty Workspace",
+  "summary": "A blank Worka workspace template used for intent-driven workspace creation.",
+  "value_proposition": "Agents handle routine work, stop for human approval, and keep a clear audit trail.",
+  "primary_flows": [
+    "External event arrives from an integration",
+    "AI team triages and takes allowed actions",
+    "The app reflects the resulting workspace state",
+    "The user is asked only when policy or confidence requires approval"
+  ]
+}

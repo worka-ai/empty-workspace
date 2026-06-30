@@ -24,12 +24,12 @@ short_description = "A blank Worka workspace template used for intent-driven wor
 screenshots = ["docs/screenshots/overview.svg"]
 
 [fst]
-blueprint = "worka/blueprint.json"
-requirements_md = "worka/requirements.md"
-requirements_json = "worka/requirements.json"
-design_boards = "worka/design-boards/manifest.json"
-specification_md = "worka/specification.md"
-specification_json = "worka/specification.json"
+blueprint = "docs/blueprint.json"
+requirements_md = "docs/requirements.md"
+requirements_json = "docs/requirements.json"
+design_boards = "target/worka/design-boards/boards.json"
+specification_md = "docs/specification.md"
+specification_json = "docs/specification.json"
 
 [app]
 crate = "crates/app"

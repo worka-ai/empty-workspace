@@ -32,7 +32,7 @@ specification_md = "worka/specification.md"
 specification_json = "worka/specification.json"
 
 [app]
-crate = "app"
+crate = "crates/app"
 native_binary = true
 plugin = true
 

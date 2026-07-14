@@ -38,4 +38,3 @@ plugin = true
 
 [personaldb]
 schema = "worka/personaldb/schema.toml"
-migrations = "worka/personaldb/migrations"

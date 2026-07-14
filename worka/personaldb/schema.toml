@@ -1,19 +1,27 @@
 [database]
 name = "workspace"
-version = 1
 
-[[entity]]
-name = "event"
-primary_key = "event_id"
+[[tables]]
+name = "records"
+writable = true
 
-[[entity]]
-name = "task"
-primary_key = "task_id"
+[[tables.columns]]
+name = "id"
+sql_type = "TEXT"
+nullable = false
+primary_key = true
 
-[[entity]]
-name = "audit_entry"
-primary_key = "audit_id"
+[[tables.columns]]
+name = "kind"
+sql_type = "TEXT"
+nullable = false
 
-[[entity]]
-name = "attention_request"
-primary_key = "attention_id"
+[[tables.columns]]
+name = "payload_json"
+sql_type = "TEXT"
+nullable = false
+
+[[tables.columns]]
+name = "updated_at"
+sql_type = "TEXT"
+nullable = false

@@ -1,0 +1,17 @@
+use anyhow::Result;
+use rmcp::transport::worka::WorkaTransport;
+use rmcp::{RoleServer, serve_server};
+
+mod domain;
+mod domain_service;
+mod server;
+
+#[tokio::main]
+async fn main() -> Result<()> {
+    let socket_path = std::env::var("WORKA_BROKER_SOCKET")
+        .unwrap_or_else(|_| "/run/worka/broker.sock".to_string());
+    let transport = WorkaTransport::<RoleServer>::connect(socket_path).await?;
+    let running = serve_server(server::AppDomainServer::default(), transport).await?;
+    running.waiting().await?;
+    Ok(())
+}

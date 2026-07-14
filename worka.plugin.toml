@@ -1,0 +1,20 @@
+[plugin]
+id = "app"
+name = "Generated Workspace App"
+version = "0.1.0"
+
+[plugin.build]
+crate = "app"
+
+[plugin.capabilities]
+broker = true
+personaldb = true
+blobs = true
+upload = true
+notifications = true
+
+[plugin.artifact_policy]
+allow_upload = true
+allow_download = true
+max_upload_bytes = 10485760
+allowed_mime_types = ["text/plain", "text/csv", "application/json", "application/pdf", "image/png", "image/jpeg", "image/webp"]

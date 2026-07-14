@@ -1,0 +1,9 @@
+.DS_Store
+*.pyc
+__pycache__/
+target/
+.worka/bin/*
+!.worka/bin/.gitkeep
+.worka/codex-home/
+.worka/gemini-home/
+.worka/claude-home/

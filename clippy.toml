@@ -1,0 +1,43 @@
+# Worka guest app policy. The controller verifies this file by SHA-256 before
+# every build so generated code cannot relax these restrictions.
+disallowed-methods = [
+    { path = "std::env::set_var", reason = "Guest apps must not mutate process environment." },
+    { path = "std::env::remove_var", reason = "Guest apps must not mutate process environment." },
+    { path = "std::fs::read", reason = "Guest apps must use brokered Worka/Fission capabilities for file access." },
+    { path = "std::fs::read_to_string", reason = "Guest apps must use brokered Worka/Fission capabilities for file access." },
+    { path = "std::fs::write", reason = "Guest apps must use brokered Worka/Fission capabilities for file access." },
+    { path = "std::fs::File::open", reason = "Guest apps must use brokered Worka/Fission capabilities for file access." },
+    { path = "std::fs::File::create", reason = "Guest apps must use brokered Worka/Fission capabilities for file access." },
+    { path = "std::net::TcpStream::connect", reason = "Guest apps must use Worka MCP/Fission capabilities for networking." },
+    { path = "std::net::UdpSocket::bind", reason = "Guest apps must use Worka MCP/Fission capabilities for networking." },
+    { path = "std::process::Command::new", reason = "Guest apps must not spawn host processes." },
+    { path = "std::thread::spawn", reason = "Generated Worka apps must use Fission jobs or brokered services instead of unmanaged host threads." },
+    { path = "std::time::SystemTime::now", reason = "Guest apps must use deterministic or shell-provided time." },
+    { path = "std::time::Instant::now", reason = "Guest apps must use deterministic or shell-provided time." },
+    { path = "std::mem::zeroed", reason = "Zero-initializing arbitrary Rust types is unsafe and invalid for generated apps." },
+    { path = "std::mem::uninitialized", reason = "Uninitialized values are unsafe and invalid for generated apps." },
+    { path = "std::mem::transmute", reason = "Type punning is unsafe and invalid for generated apps." },
+]
+
+disallowed-types = [
+    { path = "std::collections::HashMap", reason = "Use BTreeMap or a deterministic map; explicit ordering keeps generated app behavior reproducible." },
+    { path = "std::collections::HashSet", reason = "Use BTreeSet or a deterministic set; explicit ordering keeps generated app behavior reproducible." },
+    { path = "std::collections::hash_map::RandomState", reason = "Use deterministic maps or explicit ordering for reproducible generated app behavior." },
+    { path = "std::collections::hash_map::DefaultHasher", reason = "Use deterministic maps or explicit ordering for reproducible generated app behavior." },
+    { path = "std::fs::File", reason = "Guest apps must use brokered Worka/Fission capabilities for file access." },
+    { path = "std::net::TcpStream", reason = "Guest apps must use Worka MCP/Fission capabilities for networking." },
+    { path = "std::net::UdpSocket", reason = "Guest apps must use Worka MCP/Fission capabilities for networking." },
+    { path = "std::process::Command", reason = "Guest apps must not spawn host processes." },
+    { path = "std::thread::JoinHandle", reason = "Generated Worka apps must use Fission jobs or brokered services instead of unmanaged host threads." },
+    { path = "std::time::SystemTime", reason = "Guest apps must use deterministic or shell-provided time." },
+    { path = "std::time::Instant", reason = "Guest apps must use deterministic or shell-provided time." },
+]
+
+disallowed-macros = [
+    { path = "std::println", reason = "Guest apps should render UI or use structured logging, not stdout." },
+    { path = "std::eprintln", reason = "Guest apps should render UI or use structured logging, not stderr." },
+    { path = "std::dbg", reason = "Debug macros must not be present in generated production code." },
+    { path = "std::todo", reason = "Generated apps must not contain TODO placeholders." },
+    { path = "std::unimplemented", reason = "Generated apps must not contain unimplemented placeholders." },
+    { path = "std::panic", reason = "Generated apps must use explicit error handling instead of panicking." },
+]

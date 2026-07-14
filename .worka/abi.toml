@@ -1,0 +1,162 @@
+version = 1
+profile = "worka-app"
+
+[defaults]
+third_party = "deny"
+fission = "allow"
+std = "allow"
+
+[generated_output]
+target_subdir = "target/worka/abi/<profile>"
+facade_module = "worka_abi.rs"
+crates_dir = "crates"
+rustdoc_dir = "rustdoc"
+inventory_file = "inventory.json"
+
+[semantic_traits]
+allow = [
+  "PartialEq", "Eq", "PartialOrd", "Ord", "Hash",
+  "FnOnce", "FnMut", "Fn", "Default", "Clone", "Copy",
+  "Any", "Downcast", "GlobalState", "Action", "IntoHandler", "Send", "Sync", "Sized", "MetaSized", "PointeeSized", "Allocator", "BuildHasher",
+  "AsRef", "Borrow", "Deref", "DerefMut", "ToOwned",
+  "From", "Into", "TryFrom", "TryInto", "FromStr",
+  "Iterator", "IntoIterator", "DoubleEndedIterator", "ExactSizeIterator", "FusedIterator",
+  "FromIterator", "Extend", "Sum", "Product", "RangeBounds", "Index", "IndexMut",
+  "Add", "Sub", "Mul", "Div", "Rem", "Neg", "Not",
+  "BitAnd", "BitOr", "BitXor", "Shl", "Shr",
+  "AddAssign", "SubAssign", "MulAssign", "DivAssign", "RemAssign",
+  "BitAndAssign", "BitOrAssign", "BitXorAssign", "ShlAssign", "ShrAssign",
+  "Debug", "Display", "ToString", "Binary", "Octal", "LowerHex", "UpperHex", "LowerExp", "UpperExp",
+  "Pointer", "Serialize", "Deserialize", "Future", "Pattern",
+  "JobSpec", "ServiceSpec", "OperationCapability",
+]
+
+[[crate_sets]]
+name = "std_core_alloc"
+families = ["std"]
+origins = ["sysroot"]
+crates = ["core", "alloc", "std"]
+default = "allow"
+
+[[crate_sets.deny]]
+reason = "world access is outside the interpreted app profile"
+effects = ["filesystem", "network", "io", "process", "thread", "time", "random", "environment", "rustc_internal"]
+
+[[crate_sets.deny]]
+reason = "unsafe or raw host access is outside the interpreted app profile"
+safety = ["unsafe", "unstable", "rustc_internal", "target_feature", "const_generic_abi"]
+signature_contains = ["raw_pointer", "extern_fn", "mutable_static"]
+
+[[crate_sets]]
+name = "fission_app_authoring"
+families = ["fission"]
+origins = ["registry", "git", "workspace"]
+packages = [
+  "fission",
+  "fission-core",
+  "fission-widgets",
+  "fission-icons",
+  "fission-charts",
+  "fission-theme",
+  "fission-ir",
+  "fission-layout",
+  "fission-semantics",
+  "fission-i18n",
+]
+default = "allow"
+
+[[crate_sets]]
+name = "worka_mcp_client"
+families = ["third_party"]
+origins = ["registry", "git", "workspace"]
+packages = ["worka", "rmcp", "rmcp-macros"]
+default = "deny"
+
+[[crate_sets.deny]]
+reason = "direct MCP transports and process IO must be owned by the Worka host"
+effects = ["filesystem", "network", "io", "process", "thread", "time", "random", "environment", "rustc_internal"]
+
+[[crate_sets.allow]]
+reason = "Worka typed MCP client calls are the admitted backend boundary"
+packages = ["worka"]
+
+[[crate_sets.allow]]
+reason = "RMCP model/service types and macros are admitted for Worka client declarations"
+packages = ["rmcp", "rmcp-macros"]
+
+[[crate_sets]]
+name = "serde_data"
+families = ["third_party"]
+origins = ["registry", "git", "workspace"]
+packages = [
+  "serde",
+  "serde_core",
+  "serde_json",
+  "itoa",
+  "ryu",
+  "memchr",
+]
+default = "allow"
+
+[[crate_sets.allow]]
+reason = "serde data helpers are admitted deterministic data helpers"
+packages = ["serde", "serde_core", "serde_json", "itoa", "ryu", "memchr"]
+
+[[crate_sets.deny]]
+reason = "serde support is data-only and must not access the host world"
+effects = ["filesystem", "network", "io", "process", "thread", "time", "random", "environment", "rustc_internal"]
+
+[[crate_sets.deny]]
+reason = "serde support must not expose raw host access"
+safety = ["unsafe", "unstable", "rustc_internal", "target_feature", "const_generic_abi"]
+signature_contains = ["raw_pointer", "extern_fn", "mutable_static"]
+
+[[crate_sets]]
+name = "serde_generated_helpers"
+families = ["workspace"]
+origins = ["workspace"]
+default = "deny"
+
+[[crate_sets.allow]]
+reason = "serde derive helpers generated into app modules are deterministic data glue"
+item_kinds = ["function", "method", "associated_function", "trait_method"]
+signature_profile = "app_value_only"
+effects = ["pure"]
+
+[[crate_sets]]
+name = "third_party_pure_data"
+families = ["third_party"]
+origins = ["registry", "git", "workspace"]
+default = "deny"
+
+[[crate_sets.deny]]
+reason = "Fission tooling crates are not app-authoring or data-helper surface"
+packages = [
+  "cargo-fission",
+  "cargo_fission",
+  "fission-cli",
+  "fission_cli",
+  "fission-codegen",
+  "fission_codegen",
+  "fission-diagnostics",
+  "fission_diagnostics",
+  "fission-test",
+  "fission_test",
+  "fission-test-driver",
+  "fission_test_driver",
+]
+
+[[crate_sets.deny]]
+reason = "third-party world access is not admitted inside guest code"
+effects = ["filesystem", "network", "io", "process", "thread", "time", "random", "environment", "rustc_internal"]
+
+[[crate_sets.deny]]
+reason = "third-party unsafe or raw host access is not admitted"
+safety = ["unsafe", "unstable", "rustc_internal", "target_feature", "const_generic_abi"]
+signature_contains = ["raw_pointer", "extern_fn", "mutable_static"]
+
+[[crate_sets.allow]]
+reason = "pure deterministic data helpers over app-owned values"
+item_kinds = ["function", "method", "associated_function", "trait_method"]
+signature_profile = "app_value_only"
+effects = ["pure"]

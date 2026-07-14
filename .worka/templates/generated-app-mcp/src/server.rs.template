@@ -1,0 +1,43 @@
+use rmcp::handler::server::wrapper::Parameters;
+use rmcp::model::{CallToolResult, Content, ErrorData as McpError};
+use rmcp::service::RequestContext;
+use rmcp::{tool, tool_handler, tool_router, RoleServer};
+use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
+
+#[derive(Clone, Default)]
+pub struct AppDomainServer {
+    tool_router: rmcp::handler::server::tool::ToolRouter<Self>,
+}
+
+#[tool_router]
+impl AppDomainServer {
+    #[tool(description = "{{tool_description}}")]
+    async fn {{tool_name}}(
+        &self,
+        _ctx: RequestContext<RoleServer>,
+        params: Parameters<{{request_type}}>,
+    ) -> Result<CallToolResult, McpError> {
+        let response = crate::domain::{{tool_name}}(params.0)
+            .await
+            .map_err(|error| McpError::internal_error(error.to_string(), None))?;
+        let body = serde_json::to_string(&response)
+            .map_err(|error| McpError::internal_error(error.to_string(), None))?;
+        Ok(CallToolResult::success(vec![Content::text(body)]))
+    }
+}
+
+#[tool_handler]
+impl rmcp::ServerHandler for AppDomainServer {}
+
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+pub struct {{request_type}} {
+    // Replace with docs/specification.json generated_app_mcp_server.tools[].input_schema.
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+pub struct {{response_type}} {
+    pub ok: bool,
+    pub audit_event_type: String,
+    pub summary: String,
+}

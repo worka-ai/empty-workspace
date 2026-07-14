@@ -1,0 +1,11 @@
+[workspace]
+name = "workspace-app"
+template = "fission-workspace"
+template_version = "fission-workspace.plugin-mvp.v1"
+lineage = "controller-standard-template/plugin-mvp"
+public_tooling = []
+toolchain_manifest = ".worka/toolchain.toml"
+
+[build]
+mode = "plugin"
+artifact_root = "crates/app"

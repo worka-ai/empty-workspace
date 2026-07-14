@@ -1,0 +1,10 @@
+use anyhow::Result;
+
+const WORKA_GENERATED_APP_MCP_SCAFFOLD_MUST_BE_REPLACED: &str =
+    "WORKA_GENERATED_APP_MCP_SCAFFOLD_MUST_BE_REPLACED";
+
+pub async fn {{tool_name}}<T>(_request: &T) -> Result<()> {
+    anyhow::bail!(
+        "{WORKA_GENERATED_APP_MCP_SCAFFOLD_MUST_BE_REPLACED}: implement {{tool_name}} domain validation, brokered personaldb mutation when declared, and audit evidence here before returning the tool response"
+    )
+}

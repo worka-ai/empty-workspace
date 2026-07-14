@@ -1,0 +1,5 @@
+targets = []
+
+[app]
+name = "workspace-app"
+app_id = "app"

@@ -1,0 +1,13 @@
+use anyhow::Result;
+
+use crate::server::{ {{request_type}}, {{response_type}} };
+
+const WORKA_GENERATED_APP_MCP_SCAFFOLD_MUST_BE_REPLACED: &str =
+    "WORKA_GENERATED_APP_MCP_SCAFFOLD_MUST_BE_REPLACED";
+
+pub async fn {{tool_name}}(request: {{request_type}}) -> Result<{{response_type}}> {
+    crate::domain_service::{{tool_name}}(&request).await?;
+    anyhow::bail!(
+        "{WORKA_GENERATED_APP_MCP_SCAFFOLD_MUST_BE_REPLACED}: implement {{tool_name}} by validating input, calling the app domain service layer, using brokered personaldb when declared, and emitting audit event {{audit_event_type}}"
+    )
+}

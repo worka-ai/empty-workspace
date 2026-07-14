@@ -1,0 +1,4 @@
+[publication]
+artifact_root = "crates/app"
+pack_workspace = true
+artifact_mode = "plugin"

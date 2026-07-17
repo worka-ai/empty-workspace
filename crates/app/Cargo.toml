@@ -13,7 +13,7 @@ path = "src/main.rs"
 
 [dependencies]
 anyhow = "1"
-fission = { version = "0.7.0", default-features = false, features = ["desktop"] }
+fission = { version = "0.8.0", default-features = false, features = ["desktop"] }
 serde = { version = "1", features = ["derive"] }
 worka = { git = "ssh://git@github.com/worka-ai/worka-rs.git", branch = "main", default-features = false, features = ["app", "native-tcp"] }
 

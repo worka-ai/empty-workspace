@@ -2,7 +2,7 @@
   "schema_version": "worka.workspace_template.v1",
   "template_version": "fission-workspace.plugin-mvp.v1",
   "lineage": "worka-ai/empty-workspace",
-  "fission_source": "crates.io:fission@0.8.0",
+  "fission_source": "crates.io:fission@0.9.1",
   "app_facade": {
     "name": "worka",
     "source": "git@github.com:worka-ai/worka-rs.git",
